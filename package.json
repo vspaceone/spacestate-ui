@@ -1,0 +1,24 @@
+{
+  "name": "spacestate-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vspaceone/spacestate-ui.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vspaceone/spacestate-ui/issues"
+  },
+  "homepage": "https://github.com/vspaceone/spacestate-ui#readme",
+  "dependencies": {
+    "config": "^1.30.0",
+    "unirest": "^0.5.1"
+  }
+}

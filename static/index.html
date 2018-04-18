@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+
+            #particles-overlay, #particles{
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0;
+            }
+
+            #particles-overlay {                
+                margin-top: 5%;
+                z-index: 10;
+            }
+
+            #particles {
+                z-index: 5;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container-fluid bg-1 text-center" style="position:relative;padding:0;width:100%;height:100%;">
+            <div id="particles"></div>
+            <div id="particles-overlay">
+                <img src="pic/logo_vspaceone.svg" class="img-responsive img-circle margin" style="display:inline;" alt="Bird" width="350" height="350">
+                <br>
+                <button id="status" class="btn btn-warning" value="Open">Error</button>
+            </div>
+        </div>
+
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/particle-network.min.js"></script>
+        <script type="text/javascript">
+            var canvasDiv = document.getElementById('particles');
+            var options = {
+                particleColor: '#0ac26c',
+                background: '#08A059',
+                interactive: false,
+                speed: 'slow',
+                density: 'high'
+            };
+            var particleCanvas = new ParticleNetwork(canvasDiv, options);
+
+            $(document).ready(function(){
+
+                function showStatus(){       
+
+                    $.get('https://vspace.one/spaceapi', function(data){
+                        var api = JSON.parse(data);
+
+                        $('#status').removeClass('btn-warning btn-danger btn-success');
+                        if (api.state.open){
+                            $('#status').addClass('btn-success');
+                            $('#status').text('Open');
+                        } else {
+                            $('#status').addClass('btn-danger');
+                            $('#status').text('Closed');
+                        }
+                    });
+                }
+
+                showStatus();
+
+                $('#status').click(function(){
+                    $.get('/toggle', function (data) {
+                        showStatus();
+                    });
+                });
+
+                setInterval(showStatus, 1000);
+            });
+        </script>
+    </body>
+</html>
