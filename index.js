@@ -82,6 +82,9 @@ http.createServer(function(req,res){
                 }                
             })
 
+    } else if (req.url == "/") {
+        res.writeHead("302", {'Location': '/index.html'});
+        res.end('{"ok":true}', 'utf-8');
     } else {
         serveFiles(req, res);
     }
